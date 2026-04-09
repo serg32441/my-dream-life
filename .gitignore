@@ -1,0 +1,39 @@
+```
+# Dependencies
+node_modules/
+
+# Environment variables
+.env.local
+.env
+
+# Build artifacts
+dist/
+build/
+
+# Cache directories
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Coverage reports
+coverage/
+htmlcov/
+.coverage
+
+# Temporary files
+*.tmp
+```
