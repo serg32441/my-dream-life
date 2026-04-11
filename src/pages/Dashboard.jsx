@@ -29,6 +29,7 @@ const Dashboard = ({ user }) => {
                 .select('*')
                 .eq('user_id', user.id)
                 .order('created_at', { ascending: false });
+            
             if (error) throw error;
             setGoals(data || []);
         } catch (error) {
@@ -40,15 +41,22 @@ const Dashboard = ({ user }) => {
 
     const filterGoals = () => {
         let filtered = goals;
+        
         if (searchTerm) {
-            filtered = filtered.filter(goal => goal.title.toLowerCase().includes(searchTerm.toLowerCase()) || goal.description.toLowerCase().includes(searchTerm.toLowerCase()) );
+            filtered = filtered.filter(goal => 
+                goal.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                goal.description.toLowerCase().includes(searchTerm.toLowerCase())
+            );
         }
+        
         if (priorityFilter !== 'all') {
             filtered = filtered.filter(goal => goal.priority === priorityFilter);
         }
+        
         if (statusFilter !== 'all') {
             filtered = filtered.filter(goal => goal.status === statusFilter);
         }
+        
         setFilteredGoals(filtered);
     };
 
@@ -66,7 +74,9 @@ const Dashboard = ({ user }) => {
     };
 
     const handleUpdateGoal = (updatedGoal) => {
-        setGoals(goals.map(goal => goal.id === updatedGoal.id ? updatedGoal : goal));
+        setGoals(goals.map(goal => 
+            goal.id === updatedGoal.id ? updatedGoal : goal
+        ));
     };
 
     const handleLogout = async () => {
@@ -77,11 +87,20 @@ const Dashboard = ({ user }) => {
         <div className="dashboard">
             <header className="dashboard-header">
                 <h1>My Dream Life</h1>
-                <button onClick={handleLogout} className="logout-btn">Logout</button>
+                <button onClick={handleLogout} className="logout-btn">
+                    Logout
+                </button>
             </header>
             <main className="dashboard-main">
                 <GoalForm onGoalAdded={handleAddGoal} userId={user.id} />
-                <SearchFilter searchTerm={searchTerm} onSearchChange={setSearchTerm} priorityFilter={priorityFilter} onPriorityChange={setPriorityFilter} statusFilter={statusFilter} onStatusChange={setStatusFilter} />
+                <SearchFilter 
+                    searchTerm={searchTerm} 
+                    onSearchChange={setSearchTerm} 
+                    priorityFilter={priorityFilter} 
+                    onPriorityChange={setPriorityFilter} 
+                    statusFilter={statusFilter} 
+                    onStatusChange={setStatusFilter} 
+                />
                 <div className="goals-container">
                     {loading ? (
                         <p>Loading goals...</p>
@@ -89,7 +108,12 @@ const Dashboard = ({ user }) => {
                         <p>No goals found. Create one to get started!</p>
                     ) : (
                         filteredGoals.map(goal => (
-                            <GoalCard key={goal.id} goal={goal} onDelete={handleDeleteGoal} onUpdate={handleUpdateGoal} />
+                            <GoalCard 
+                                key={goal.id} 
+                                goal={goal} 
+                                onDelete={handleDeleteGoal} 
+                                onUpdate={handleUpdateGoal} 
+                            />
                         ))
                     )}
                 </div>
