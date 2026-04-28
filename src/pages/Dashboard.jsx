@@ -1,72 +1,81 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabaseClient';
-import GoalForm from '../components/GoalForm';
-import GoalCard from '../components/GoalCard';
+import PromptForm from '../components/PromptForm';
+import PromptCard from '../components/PromptCard';
 import SearchFilter from '../components/SearchFilter';
 import '../styles/Dashboard.css';
 
 const Dashboard = ({ user }) => {
-    const [goals, setGoals] = useState([]);
-    const [filteredGoals, setFilteredGoals] = useState([]);
+    const [prompts, setPrompts] = useState([]);
+    const [filteredPrompts, setFilteredPrompts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
-    const [priorityFilter, setPriorityFilter] = useState('all');
-    const [statusFilter, setStatusFilter] = useState('all');
+    const [categoryFilter, setCategoryFilter] = useState('all');
+    const [showMyPromptsOnly, setShowMyPromptsOnly] = useState(false);
 
     useEffect(() => {
-        fetchGoals();
+        fetchPrompts();
     }, []);
 
     useEffect(() => {
-        filterGoals();
-    }, [goals, searchTerm, priorityFilter, statusFilter]);
+        filterPrompts();
+    }, [prompts, searchTerm, categoryFilter, showMyPromptsOnly]);
 
-    const fetchGoals = async () => {
+    const fetchPrompts = async () => {
         try {
             setLoading(true);
-            const { data, error } = await supabase
-                .from('goals')
+            let query = supabase
+                .from('prompts')
                 .select('*')
-                .eq('user_id', user.id)
                 .order('created_at', { ascending: false });
+
+            const { data, error } = await query;
+            
             if (error) throw error;
-            setGoals(data || []);
+            setPrompts(data || []);
         } catch (error) {
-            console.error('Error fetching goals:', error);
+            console.error('Error fetching prompts:', error);
         } finally {
             setLoading(false);
         }
     };
 
-    const filterGoals = () => {
-        let filtered = goals;
+    const filterPrompts = () => {
+        let filtered = prompts;
+        
+        if (showMyPromptsOnly) {
+            filtered = filtered.filter(prompt => prompt.user_id === user.id);
+        }
+        
         if (searchTerm) {
-            filtered = filtered.filter(goal => goal.title.toLowerCase().includes(searchTerm.toLowerCase()) || goal.description.toLowerCase().includes(searchTerm.toLowerCase()) );
+            filtered = filtered.filter(prompt => 
+                prompt.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                (prompt.description && prompt.description.toLowerCase().includes(searchTerm.toLowerCase()))
+            );
         }
-        if (priorityFilter !== 'all') {
-            filtered = filtered.filter(goal => goal.priority === priorityFilter);
+        
+        if (categoryFilter !== 'all') {
+            filtered = filtered.filter(prompt => prompt.category === categoryFilter);
         }
-        if (statusFilter !== 'all') {
-            filtered = filtered.filter(goal => goal.status === statusFilter);
-        }
-        setFilteredGoals(filtered);
+        
+        setFilteredPrompts(filtered);
     };
 
-    const handleAddGoal = (newGoal) => {
-        setGoals([newGoal, ...goals]);
+    const handleAddPrompt = (newPrompt) => {
+        setPrompts([newPrompt, ...prompts]);
     };
 
-    const handleDeleteGoal = async (goalId) => {
+    const handleDeletePrompt = async (promptId) => {
+        if (!window.confirm('Вы уверены, что хотите удалить этот промт?')) return;
+        
         try {
-            await supabase.from('goals').delete().eq('id', goalId);
-            setGoals(goals.filter(goal => goal.id !== goalId));
+            const { error } = await supabase.from('prompts').delete().eq('id', promptId);
+            if (error) throw error;
+            setPrompts(prompts.filter(prompt => prompt.id !== promptId));
         } catch (error) {
-            console.error('Error deleting goal:', error);
+            console.error('Error deleting prompt:', error);
+            alert('Ошибка при удалении промта');
         }
-    };
-
-    const handleUpdateGoal = (updatedGoal) => {
-        setGoals(goals.map(goal => goal.id === updatedGoal.id ? updatedGoal : goal));
     };
 
     const handleLogout = async () => {
@@ -76,21 +85,49 @@ const Dashboard = ({ user }) => {
     return (
         <div className="dashboard">
             <header className="dashboard-header">
-                <h1>My Dream Life</h1>
-                <button onClick={handleLogout} className="logout-btn">Logout</button>
+                <div className="header-content">
+                    <h1>🚀 ПромтМаркетплейс</h1>
+                    <p className="user-info">Привет, {user.email}</p>
+                </div>
+                <button onClick={handleLogout} className="logout-btn">Выйти</button>
             </header>
+            
             <main className="dashboard-main">
-                <GoalForm onGoalAdded={handleAddGoal} userId={user.id} />
-                <SearchFilter searchTerm={searchTerm} onSearchChange={setSearchTerm} priorityFilter={priorityFilter} onPriorityChange={setPriorityFilter} statusFilter={statusFilter} onStatusChange={setStatusFilter} />
-                <div className="goals-container">
+                <PromptForm onPromptAdded={handleAddPrompt} userId={user.id} />
+                
+                <SearchFilter 
+                    searchTerm={searchTerm} 
+                    onSearchChange={setSearchTerm} 
+                    categoryFilter={categoryFilter}
+                    onCategoryChange={setCategoryFilter}
+                    showMyPromptsOnly={showMyPromptsOnly}
+                    onShowMyPromptsChange={setShowMyPromptsOnly}
+                />
+                
+                <div className="prompts-container">
+                    <h2>
+                        {showMyPromptsOnly ? 'Мои промты' : 'Все промты'} 
+                        ({filteredPrompts.length})
+                    </h2>
+                    
                     {loading ? (
-                        <p>Loading goals...</p>
-                    ) : filteredGoals.length === 0 ? (
-                        <p>No goals found. Create one to get started!</p>
+                        <p className="loading">Загрузка промтов...</p>
+                    ) : filteredPrompts.length === 0 ? (
+                        <p className="no-prompts">
+                            {showMyPromptsOnly 
+                                ? 'У вас пока нет промтов. Создайте первый!' 
+                                : 'Промты не найдены.'}
+                        </p>
                     ) : (
-                        filteredGoals.map(goal => (
-                            <GoalCard key={goal.id} goal={goal} onDelete={handleDeleteGoal} onUpdate={handleUpdateGoal} />
-                        ))
+                        <div className="prompts-grid">
+                            {filteredPrompts.map(prompt => (
+                                <PromptCard 
+                                    key={prompt.id} 
+                                    prompt={prompt} 
+                                    onDelete={prompt.user_id === user.id ? handleDeletePrompt : null}
+                                />
+                            ))}
+                        </div>
                     )}
                 </div>
             </main>
