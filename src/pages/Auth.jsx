@@ -1,65 +1,108 @@
 import React, { useState } from 'react';
-import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { supabase } from '../lib/supabaseClient';
 
 const Auth = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isSignUp, setIsSignUp] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
 
-    const auth = getAuth();
+    const handleEmailAuth = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        setError('');
+
+        try {
+            if (isSignUp) {
+                const { data, error } = await supabase.auth.signUp({
+                    email,
+                    password
+                });
+                if (error) throw error;
+                alert('Проверьте вашу почту для подтверждения регистрации!');
+            } else {
+                const { data, error } = await supabase.auth.signInWithPassword({
+                    email,
+                    password
+                });
+                if (error) throw error;
+            }
+        } catch (error) {
+            setError(error.message);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const handleGoogleSignIn = async () => {
-        const googleProvider = new GoogleAuthProvider();
         try {
-            const result = await signInWithPopup(auth, googleProvider);
-            // User signed in
-            const user = result.user;
-            console.log('Google User: ', user);
+            const { error } = await supabase.auth.signInWithOAuth({
+                provider: 'google'
+            });
+            if (error) throw error;
         } catch (error) {
-            console.error('Error signing in with Google: ', error);
-        }
-    };
-
-    const handleEmailSignUp = async () => {
-        try {
-            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            // User signed up
-            const user = userCredential.user;
-            console.log('User signed up: ', user);
-        } catch (error) {
-            console.error('Error signing up with email: ', error);
-        }
-    };
-
-    const handleEmailSignIn = async () => {
-        try {
-            const userCredential = await signInWithEmailAndPassword(auth, email, password);
-            // User signed in
-            const user = userCredential.user;
-            console.log('User signed in: ', user);
-        } catch (error) {
-            console.error('Error signing in with email: ', error);
+            setError(error.message);
         }
     };
 
     return (
-        <div>
-            <h2>Authentication</h2>
-            <button onClick={handleGoogleSignIn}>Sign in with Google</button>
-            <hr />
-            <input
-                type='email'
-                placeholder='Email'
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-            <input
-                type='password'
-                placeholder='Password'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            <button onClick={handleEmailSignUp}>Sign Up</button>
-            <button onClick={handleEmailSignIn}>Sign In</button>
+        <div className="auth-container">
+            <div className="auth-card">
+                <h1>🚀 ПромтМаркетплейс</h1>
+                <p className="auth-subtitle">Делитесь промтами для нейросетей бесплатно</p>
+                
+                <form onSubmit={handleEmailAuth} className="auth-form">
+                    <div className="form-group">
+                        <label htmlFor="email">Email</label>
+                        <input
+                            id="email"
+                            type="email"
+                            placeholder="your@email.com"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="password">Пароль</label>
+                        <input
+                            id="password"
+                            type="password"
+                            placeholder="••••••••"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                            minLength={6}
+                        />
+                    </div>
+
+                    {error && <p className="error-message">{error}</p>}
+
+                    <button type="submit" className="submit-btn" disabled={loading}>
+                        {loading ? 'Загрузка...' : (isSignUp ? 'Зарегистрироваться' : 'Войти')}
+                    </button>
+                </form>
+
+                <div className="divider">
+                    <span>или</span>
+                </div>
+
+                <button onClick={handleGoogleSignIn} className="google-btn">
+                    Войти через Google
+                </button>
+
+                <p className="toggle-auth">
+                    {isSignUp ? 'Уже есть аккаунт?' : 'Нет аккаунта?'}
+                    <button 
+                        onClick={() => setIsSignUp(!isSignUp)} 
+                        className="toggle-btn"
+                    >
+                        {isSignUp ? 'Войти' : 'Зарегистрироваться'}
+                    </button>
+                </p>
+            </div>
         </div>
     );
 };
