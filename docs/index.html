@@ -102,6 +102,24 @@
   .link-code{background:var(--bg-2);border:1px solid var(--border);color:var(--text)}
   .link-code:hover{background:#1d2433}
 
+  /* ===== Project list ===== */
+  .list{display:flex;flex-direction:column;gap:12px}
+  .row{
+    display:flex;align-items:center;justify-content:space-between;gap:24px;
+    background:var(--card);border:1px solid var(--border);border-radius:14px;
+    padding:18px 24px;transition:.2s
+  }
+  .row:hover{border-color:#33405c;background:var(--card-hover);transform:translateX(4px)}
+  .row .info{flex:1;min-width:0}
+  .row .info h3{font-size:17px;font-weight:700}
+  .row .info p{color:var(--muted);font-size:14px;margin-top:3px}
+  .row .info .meta-tags{margin-top:8px;display:flex;flex-wrap:wrap;gap:6px}
+  .row .actions{display:flex;gap:10px;flex-shrink:0}
+  .row .actions a{
+    display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;
+    padding:11px 20px;border-radius:10px;font-size:13.5px;font-weight:600;transition:.2s
+  }
+
   /* ===== HERMES feature ===== */
   .hermes{
     background:
@@ -144,6 +162,9 @@
     .hero{grid-template-columns:1fr;gap:30px}
     .hermes{grid-template-columns:1fr;padding:30px}
     .nav-links{display:none}
+    .row{flex-direction:column;align-items:flex-start;gap:16px}
+    .row .actions{width:100%}
+    .row .actions a{flex:1}
   }
 </style>
 </head>
@@ -215,41 +236,49 @@
       <h2><span class="ic">🧠</span> ИИ-решения и чат-боты</h2>
       <p>Сервисы на базе искусственного интеллекта: умный подбор, локальные LLM и контент-проекты про ИИ в бизнесе.</p>
     </div>
-    <div class="grid">
+    <div class="list">
 
-      <div class="card">
-        <h3>mentorAI</h3>
-        <div class="desc">ИИ-сервис подбора духовного наставника: пользователь описывает запрос, а алгоритм подбирает подходящего ментора.</div>
-        <div class="tags"><span class="tag">JavaScript</span><span class="tag">AI-подбор</span><span class="tag">Web</span></div>
-        <div class="links">
+      <div class="row">
+        <div class="info">
+          <h3>mentorAI</h3>
+          <p>ИИ-сервис подбора духовного наставника: пользователь описывает запрос, а алгоритм подбирает подходящего ментора.</p>
+          <div class="meta-tags"><span class="tag">JavaScript</span><span class="tag">AI-подбор</span><span class="tag">Web</span></div>
+        </div>
+        <div class="actions">
           <a class="link-code" href="https://github.com/serg32441/mentorAI" target="_blank" rel="noopener">GitHub</a>
         </div>
       </div>
 
-      <div class="card">
-        <h3>Search Mentor</h3>
-        <div class="desc">Веб-приложение «Поиск духовного наставника» с подбором и удобным интерфейсом. Развёрнуто на Vercel.</div>
-        <div class="tags"><span class="tag">Web App</span><span class="tag">AI</span><span class="tag">Vercel</span></div>
-        <div class="links">
-          <a class="link-live" href="https://search-mentor-soch.vercel.app" target="_blank" rel="noopener">Открыть демо</a>
+      <div class="row">
+        <div class="info">
+          <h3>Search Mentor</h3>
+          <p>Веб-приложение «Поиск духовного наставника» с подбором и удобным интерфейсом. Развёрнуто на Vercel.</p>
+          <div class="meta-tags"><span class="tag">Web App</span><span class="tag">AI</span><span class="tag">Vercel</span></div>
+        </div>
+        <div class="actions">
+          <a class="link-live" href="https://search-mentor-soch.vercel.app" target="_blank" rel="noopener">Открыть</a>
           <a class="link-code" href="https://github.com/serg32441/Search-mentor-soch" target="_blank" rel="noopener">GitHub</a>
         </div>
       </div>
 
-      <div class="card">
-        <h3>Local LLM Guide</h3>
-        <div class="desc">Практическое руководство по запуску локальных нейросетей: настройка Ollama, Open WebUI и RAG-системы по своим документам.</div>
-        <div class="tags"><span class="tag">TypeScript</span><span class="tag">Ollama</span><span class="tag">RAG</span></div>
-        <div class="links">
+      <div class="row">
+        <div class="info">
+          <h3>Local LLM Guide</h3>
+          <p>Практическое руководство по запуску локальных нейросетей: настройка Ollama, Open WebUI и RAG-системы по своим документам.</p>
+          <div class="meta-tags"><span class="tag">TypeScript</span><span class="tag">Ollama</span><span class="tag">RAG</span></div>
+        </div>
+        <div class="actions">
           <a class="link-code" href="https://github.com/serg32441/local-llm-guide" target="_blank" rel="noopener">GitHub</a>
         </div>
       </div>
 
-      <div class="card">
-        <h3>ИИ в бизнесе</h3>
-        <div class="desc">Премиальная статья и кейсы о применении искусственного интеллекта в бизнесе — контент-проект с современным дизайном.</div>
-        <div class="tags"><span class="tag">Контент</span><span class="tag">AI</span><span class="tag">GitHub Pages</span></div>
-        <div class="links">
+      <div class="row">
+        <div class="info">
+          <h3>ИИ в бизнесе</h3>
+          <p>Премиальная статья и кейсы о применении искусственного интеллекта в бизнесе — контент-проект с современным дизайном.</p>
+          <div class="meta-tags"><span class="tag">Контент</span><span class="tag">AI</span><span class="tag">GitHub Pages</span></div>
+        </div>
+        <div class="actions">
           <a class="link-live" href="https://serg32441.github.io/ai-business-article/" target="_blank" rel="noopener">Открыть</a>
           <a class="link-code" href="https://github.com/serg32441/ai-business-article" target="_blank" rel="noopener">GitHub</a>
         </div>
@@ -264,33 +293,39 @@
       <h2><span class="ic">⚙️</span> Веб-сервисы и приложения</h2>
       <p>Полноценные приложения с фронтендом и бэкендом: парсеры, трекеры и интерактивные сервисы.</p>
     </div>
-    <div class="grid">
+    <div class="list">
 
-      <div class="card">
-        <h3>Auto Detailing</h3>
-        <div class="desc">Премиальный сайт-сервис автодетейлинга с 3D-эффектами и современным стеком. Интерактивный интерфейс и серверная логика.</div>
-        <div class="tags"><span class="tag">React</span><span class="tag">Three.js</span><span class="tag">tRPC</span><span class="tag">Drizzle ORM</span></div>
-        <div class="links">
-          <a class="link-live" href="https://auto-detailing-seven.vercel.app" target="_blank" rel="noopener">Открыть демо</a>
+      <div class="row">
+        <div class="info">
+          <h3>Auto Detailing</h3>
+          <p>Премиальный сайт-сервис автодетейлинга с 3D-эффектами и современным стеком. Интерактивный интерфейс и серверная логика.</p>
+          <div class="meta-tags"><span class="tag">React</span><span class="tag">Three.js</span><span class="tag">tRPC</span><span class="tag">Drizzle ORM</span></div>
+        </div>
+        <div class="actions">
+          <a class="link-live" href="https://auto-detailing-seven.vercel.app" target="_blank" rel="noopener">Открыть</a>
           <a class="link-code" href="https://github.com/serg32441/auto-detailing" target="_blank" rel="noopener">GitHub</a>
         </div>
       </div>
 
-      <div class="card">
-        <h3>Парсер торгов по банкротству</h3>
-        <div class="desc">Сервис парсинга и отображения лотов с торгов по банкротству (ЕФРСБ): должники, объявления и лоты дебиторской задолженности.</div>
-        <div class="tags"><span class="tag">React 19</span><span class="tag">tRPC + Hono</span><span class="tag">Drizzle</span><span class="tag">PostgreSQL</span></div>
-        <div class="links">
-          <a class="link-live" href="https://bankruptcy-lots-parser.vercel.app" target="_blank" rel="noopener">Открыть демо</a>
+      <div class="row">
+        <div class="info">
+          <h3>Парсер торгов по банкротству</h3>
+          <p>Сервис парсинга и отображения лотов с торгов по банкротству (ЕФРСБ): должники, объявления и лоты дебиторской задолженности.</p>
+          <div class="meta-tags"><span class="tag">React 19</span><span class="tag">tRPC + Hono</span><span class="tag">Drizzle</span><span class="tag">PostgreSQL</span></div>
+        </div>
+        <div class="actions">
+          <a class="link-live" href="https://bankruptcy-lots-parser.vercel.app" target="_blank" rel="noopener">Открыть</a>
           <a class="link-code" href="https://github.com/serg32441/bankruptcy-lots-parser" target="_blank" rel="noopener">GitHub</a>
         </div>
       </div>
 
-      <div class="card">
-        <h3>My Dream Life</h3>
-        <div class="desc">Приложение для постановки и трекинга целей: управление приоритетами, визуализация прогресса, уведомления и авторизация.</div>
-        <div class="tags"><span class="tag">React</span><span class="tag">Supabase</span><span class="tag">Auth</span></div>
-        <div class="links">
+      <div class="row">
+        <div class="info">
+          <h3>My Dream Life</h3>
+          <p>Приложение для постановки и трекинга целей: управление приоритетами, визуализация прогресса, уведомления и авторизация.</p>
+          <div class="meta-tags"><span class="tag">React</span><span class="tag">Supabase</span><span class="tag">Auth</span></div>
+        </div>
+        <div class="actions">
           <a class="link-code" href="https://github.com/serg32441/my-dream-life" target="_blank" rel="noopener">GitHub</a>
         </div>
       </div>
@@ -304,13 +339,15 @@
       <h2><span class="ic">🖥️</span> Серверные модули и интеграции</h2>
       <p>Бэкенд-модули и интеграции с внешними системами — работают на сервере и расширяют возможности бизнеса.</p>
     </div>
-    <div class="grid">
+    <div class="list">
 
-      <div class="card">
-        <h3>Модуль сверки БТИ для amoCRM</h3>
-        <div class="desc">Серверный модуль для amoCRM: автоматическая сверка схем из БТИ. Интеграция, ускоряющая работу отдела и снижающая число ошибок.</div>
-        <div class="tags"><span class="tag">amoCRM</span><span class="tag">Интеграция</span><span class="tag">Backend</span></div>
-        <div class="links">
+      <div class="row">
+        <div class="info">
+          <h3>Модуль сверки БТИ для amoCRM</h3>
+          <p>Серверный модуль для amoCRM: автоматическая сверка схем из БТИ. Интеграция, ускоряющая работу отдела и снижающая число ошибок.</p>
+          <div class="meta-tags"><span class="tag">amoCRM</span><span class="tag">Интеграция</span><span class="tag">Backend</span></div>
+        </div>
+        <div class="actions">
           <a class="link-code" href="https://github.com/serg32441/cnerka-bti" target="_blank" rel="noopener">GitHub</a>
         </div>
       </div>
@@ -324,102 +361,122 @@
       <h2><span class="ic">🚀</span> Лендинги и продающие сайты</h2>
       <p>Быстрые, адаптивные и продающие одностраничники для услуг и бизнеса — с живыми демо.</p>
     </div>
-    <div class="grid">
+    <div class="list">
 
-      <div class="card">
-        <h3>Стеновые панели в Сочи</h3>
-        <div class="desc">Лендинг премиальных стеновых панелей: каталог, преимущества и форма заявки.</div>
-        <div class="tags"><span class="tag">HTML/CSS</span><span class="tag">Премиум</span></div>
-        <div class="links">
+      <div class="row">
+        <div class="info">
+          <h3>Стеновые панели в Сочи</h3>
+          <p>Лендинг премиальных стеновых панелей: каталог, преимущества и форма заявки.</p>
+          <div class="meta-tags"><span class="tag">HTML/CSS</span><span class="tag">Премиум</span></div>
+        </div>
+        <div class="actions">
           <a class="link-live" href="https://serg32441.github.io/wall-panels-sochi/" target="_blank" rel="noopener">Открыть</a>
           <a class="link-code" href="https://github.com/serg32441/wall-panels-sochi" target="_blank" rel="noopener">GitHub</a>
         </div>
       </div>
 
-      <div class="card">
-        <h3>АвтоДетейлинг Сочи</h3>
-        <div class="desc">Сайт химчистки автомобилей: услуги, цены и онлайн-запись. Современный адаптивный дизайн.</div>
-        <div class="tags"><span class="tag">TypeScript</span><span class="tag">Лендинг</span></div>
-        <div class="links">
+      <div class="row">
+        <div class="info">
+          <h3>АвтоДетейлинг Сочи</h3>
+          <p>Сайт химчистки автомобилей: услуги, цены и онлайн-запись. Современный адаптивный дизайн.</p>
+          <div class="meta-tags"><span class="tag">TypeScript</span><span class="tag">Лендинг</span></div>
+        </div>
+        <div class="actions">
           <a class="link-live" href="https://autodetail-sochi.vercel.app" target="_blank" rel="noopener">Открыть</a>
           <a class="link-code" href="https://github.com/serg32441/autodetail-sochi" target="_blank" rel="noopener">GitHub</a>
         </div>
       </div>
 
-      <div class="card">
-        <h3>Sochi Detailing</h3>
-        <div class="desc">Лендинг услуг детейлинга в Сочи с акцентом на визуал и конверсию.</div>
-        <div class="tags"><span class="tag">HTML/CSS</span><span class="tag">Лендинг</span></div>
-        <div class="links">
+      <div class="row">
+        <div class="info">
+          <h3>Sochi Detailing</h3>
+          <p>Лендинг услуг детейлинга в Сочи с акцентом на визуал и конверсию.</p>
+          <div class="meta-tags"><span class="tag">HTML/CSS</span><span class="tag">Лендинг</span></div>
+        </div>
+        <div class="actions">
           <a class="link-live" href="https://sochi-detailing.vercel.app" target="_blank" rel="noopener">Открыть</a>
           <a class="link-code" href="https://github.com/serg32441/sochi-detailing" target="_blank" rel="noopener">GitHub</a>
         </div>
       </div>
 
-      <div class="card">
-        <h3>Химчистка и полировка авто</h3>
-        <div class="desc">Сайт частного мастера Сергея: химчистка и полировка авто — услуги, кейсы и контакты.</div>
-        <div class="tags"><span class="tag">HTML/CSS</span><span class="tag">Лендинг</span></div>
-        <div class="links">
+      <div class="row">
+        <div class="info">
+          <h3>Химчистка и полировка авто</h3>
+          <p>Сайт частного мастера Сергея: химчистка и полировка авто — услуги, кейсы и контакты.</p>
+          <div class="meta-tags"><span class="tag">HTML/CSS</span><span class="tag">Лендинг</span></div>
+        </div>
+        <div class="actions">
           <a class="link-code" href="https://github.com/serg32441/chemclean-sochi" target="_blank" rel="noopener">GitHub</a>
         </div>
       </div>
 
-      <div class="card">
-        <h3>Мойка фасадов</h3>
-        <div class="desc">Premium-лендинг услуги мойки фасадов: чистый дизайн, акцент на результат «до/после».</div>
-        <div class="tags"><span class="tag">HTML/CSS</span><span class="tag">Премиум</span></div>
-        <div class="links">
+      <div class="row">
+        <div class="info">
+          <h3>Мойка фасадов</h3>
+          <p>Premium-лендинг услуги мойки фасадов: чистый дизайн, акцент на результат «до/после».</p>
+          <div class="meta-tags"><span class="tag">HTML/CSS</span><span class="tag">Премиум</span></div>
+        </div>
+        <div class="actions">
           <a class="link-live" href="https://facade-sochi.vercel.app" target="_blank" rel="noopener">Открыть</a>
           <a class="link-code" href="https://github.com/serg32441/facade-sochi" target="_blank" rel="noopener">GitHub</a>
         </div>
       </div>
 
-      <div class="card">
-        <h3>Arbolito</h3>
-        <div class="desc">Лендинг бренда Arbolito с современной версткой и анимацией.</div>
-        <div class="tags"><span class="tag">HTML/CSS</span><span class="tag">Лендинг</span></div>
-        <div class="links">
+      <div class="row">
+        <div class="info">
+          <h3>Arbolito</h3>
+          <p>Лендинг бренда Arbolito с современной версткой и анимацией.</p>
+          <div class="meta-tags"><span class="tag">HTML/CSS</span><span class="tag">Лендинг</span></div>
+        </div>
+        <div class="actions">
           <a class="link-live" href="https://arbolito-landing.vercel.app" target="_blank" rel="noopener">Открыть</a>
           <a class="link-code" href="https://github.com/serg32441/arbolito-landing" target="_blank" rel="noopener">GitHub</a>
         </div>
       </div>
 
-      <div class="card">
-        <h3>Яндекс.Кит — услуги</h3>
-        <div class="desc">Лендинг по настройке интернет-магазинов на Яндекс.Кит и переносу с маркетплейсов.</div>
-        <div class="tags"><span class="tag">HTML/CSS</span><span class="tag">E-commerce</span></div>
-        <div class="links">
+      <div class="row">
+        <div class="info">
+          <h3>Яндекс.Кит — услуги</h3>
+          <p>Лендинг по настройке интернет-магазинов на Яндекс.Кит и переносу с маркетплейсов.</p>
+          <div class="meta-tags"><span class="tag">HTML/CSS</span><span class="tag">E-commerce</span></div>
+        </div>
+        <div class="actions">
           <a class="link-live" href="https://serg32441.github.io/yandex-kit-services/" target="_blank" rel="noopener">Открыть</a>
           <a class="link-code" href="https://github.com/serg32441/yandex-kit-services" target="_blank" rel="noopener">GitHub</a>
         </div>
       </div>
 
-      <div class="card">
-        <h3>KitPro</h3>
-        <div class="desc">Лендинг услуг разработки магазинов на Яндекс.Кит: пакеты, кейсы и заявка.</div>
-        <div class="tags"><span class="tag">TypeScript</span><span class="tag">E-commerce</span></div>
-        <div class="links">
+      <div class="row">
+        <div class="info">
+          <h3>KitPro</h3>
+          <p>Лендинг услуг разработки магазинов на Яндекс.Кит: пакеты, кейсы и заявка.</p>
+          <div class="meta-tags"><span class="tag">TypeScript</span><span class="tag">E-commerce</span></div>
+        </div>
+        <div class="actions">
           <a class="link-live" href="https://kitpro-yandex-kit-store.vercel.app" target="_blank" rel="noopener">Открыть</a>
           <a class="link-code" href="https://github.com/serg32441/kitpro-yandex-kit-store" target="_blank" rel="noopener">GitHub</a>
         </div>
       </div>
 
-      <div class="card">
-        <h3>Montre — фотограф в Сочи</h3>
-        <div class="desc">Сайт-портфолио фотографа: портрет, свадьба и съёмка недвижимости. Галерея и форма заявки.</div>
-        <div class="tags"><span class="tag">HTML/CSS</span><span class="tag">Портфолио</span></div>
-        <div class="links">
+      <div class="row">
+        <div class="info">
+          <h3>Montre — фотограф в Сочи</h3>
+          <p>Сайт-портфолио фотографа: портрет, свадьба и съёмка недвижимости. Галерея и форма заявки.</p>
+          <div class="meta-tags"><span class="tag">HTML/CSS</span><span class="tag">Портфолио</span></div>
+        </div>
+        <div class="actions">
           <a class="link-live" href="https://serg32441.github.io/montre/" target="_blank" rel="noopener">Открыть</a>
           <a class="link-code" href="https://github.com/serg32441/montre" target="_blank" rel="noopener">GitHub</a>
         </div>
       </div>
 
-      <div class="card">
-        <h3>Finance Thinks</h3>
-        <div class="desc">Финансовый лендинг с акцентом на доверие и понятную подачу услуг.</div>
-        <div class="tags"><span class="tag">HTML/CSS</span><span class="tag">Финансы</span></div>
-        <div class="links">
+      <div class="row">
+        <div class="info">
+          <h3>Finance Thinks</h3>
+          <p>Финансовый лендинг с акцентом на доверие и понятную подачу услуг.</p>
+          <div class="meta-tags"><span class="tag">HTML/CSS</span><span class="tag">Финансы</span></div>
+        </div>
+        <div class="actions">
           <a class="link-live" href="https://page-finance-thinks.vercel.app" target="_blank" rel="noopener">Открыть</a>
           <a class="link-code" href="https://github.com/serg32441/page-finance-thinks" target="_blank" rel="noopener">GitHub</a>
         </div>
