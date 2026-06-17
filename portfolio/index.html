@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Сергей Коротких — Портфолио: веб-сервисы, ИИ-агенты, лендинги</title>
+<meta name="description" content="Портфолио разработчика: ИИ-агент HERMES, веб-сервисы и приложения, чат-боты, серверные интеграции и лендинги." />
+<style>
+  :root{
+    --bg:#0a0c12;
+    --bg-2:#0f131c;
+    --card:#141925;
+    --card-hover:#1a2030;
+    --border:#222a3a;
+    --text:#e8ecf4;
+    --muted:#9aa4b8;
+    --accent:#6c8cff;
+    --accent-2:#a06bff;
+    --accent-3:#27d3a2;
+    --gold:#ffcf6b;
+    --radius:18px;
+    --shadow:0 18px 50px rgba(0,0,0,.45);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    background:radial-gradient(1200px 700px at 80% -10%,rgba(108,140,255,.18),transparent 60%),
+               radial-gradient(900px 600px at -10% 20%,rgba(160,107,255,.14),transparent 55%),
+               var(--bg);
+    color:var(--text);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+
+  /* ===== Header / Hero ===== */
+  header{position:relative;overflow:hidden}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0}
+  .brand{display:flex;align-items:center;gap:12px;font-weight:700;letter-spacing:.3px}
+  .brand .logo{
+    width:40px;height:40px;border-radius:12px;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    display:grid;place-items:center;font-weight:800;color:#fff;box-shadow:var(--shadow)
+  }
+  .nav-links{display:flex;gap:8px;flex-wrap:wrap}
+  .nav-links a{
+    padding:8px 14px;border-radius:999px;color:var(--muted);font-size:14px;
+    border:1px solid transparent;transition:.2s
+  }
+  .nav-links a:hover{color:var(--text);border-color:var(--border);background:var(--card)}
+
+  .hero{padding:60px 0 50px;display:grid;grid-template-columns:1.3fr .9fr;gap:40px;align-items:center}
+  .hero h1{font-size:clamp(34px,5vw,56px);line-height:1.08;font-weight:800;letter-spacing:-.5px}
+  .hero h1 .grad{
+    background:linear-gradient(120deg,var(--accent),var(--accent-2) 55%,var(--accent-3));
+    -webkit-background-clip:text;background-clip:text;color:transparent
+  }
+  .hero p.lead{margin-top:18px;font-size:18px;color:var(--muted);max-width:560px}
+  .hero .cta{margin-top:28px;display:flex;gap:14px;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:12px;
+    font-weight:600;font-size:15px;border:1px solid var(--border);transition:.2s;cursor:pointer
+  }
+  .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent-2));border:none;color:#fff;box-shadow:0 10px 30px rgba(108,140,255,.35)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(108,140,255,.45)}
+  .btn-ghost{background:var(--card);color:var(--text)}
+  .btn-ghost:hover{background:var(--card-hover);transform:translateY(-2px)}
+
+  .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  .stat{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+  .stat .num{font-size:34px;font-weight:800;background:linear-gradient(120deg,var(--accent),var(--accent-3));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stat .label{color:var(--muted);font-size:14px;margin-top:4px}
+
+  /* ===== Sections ===== */
+  section{padding:46px 0}
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:26px;flex-wrap:wrap}
+  .sec-head h2{font-size:clamp(24px,3vw,34px);font-weight:800;letter-spacing:-.3px;display:flex;align-items:center;gap:12px}
+  .sec-head h2 .ic{font-size:26px}
+  .sec-head p{color:var(--muted);max-width:520px;font-size:15px}
+  .chip{display:inline-block;font-size:12px;color:var(--accent);background:rgba(108,140,255,.12);border:1px solid rgba(108,140,255,.3);padding:4px 12px;border-radius:999px;font-weight:600}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px}
+  .card{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:24px;display:flex;flex-direction:column;gap:14px;transition:.25s;position:relative;overflow:hidden
+  }
+  .card::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(108,140,255,.08),transparent 40%);opacity:0;transition:.25s}
+  .card:hover{transform:translateY(-5px);border-color:#33405c;box-shadow:var(--shadow);background:var(--card-hover)}
+  .card:hover::before{opacity:1}
+  .card h3{font-size:19px;font-weight:700;position:relative}
+  .card .desc{color:var(--muted);font-size:14.5px;flex:1;position:relative}
+  .tags{display:flex;flex-wrap:wrap;gap:7px;position:relative}
+  .tag{font-size:11.5px;color:var(--muted);background:var(--bg-2);border:1px solid var(--border);padding:3px 10px;border-radius:7px}
+  .links{display:flex;gap:10px;margin-top:4px;position:relative}
+  .links a{
+    flex:1;text-align:center;padding:10px;border-radius:10px;font-size:13.5px;font-weight:600;transition:.2s
+  }
+  .link-live{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff}
+  .link-live:hover{filter:brightness(1.1)}
+  .link-code{background:var(--bg-2);border:1px solid var(--border);color:var(--text)}
+  .link-code:hover{background:#1d2433}
+
+  /* ===== HERMES feature ===== */
+  .hermes{
+    background:
+      radial-gradient(700px 300px at 90% -20%,rgba(255,207,107,.16),transparent 60%),
+      linear-gradient(135deg,#161b2b,#10131d);
+    border:1px solid #2b3450;border-radius:24px;padding:42px;box-shadow:var(--shadow);
+    display:grid;grid-template-columns:1.2fr 1fr;gap:36px;align-items:center;position:relative;overflow:hidden
+  }
+  .hermes .badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,207,107,.14);color:var(--gold);border:1px solid rgba(255,207,107,.35);padding:6px 14px;border-radius:999px;font-size:13px;font-weight:700;letter-spacing:.5px}
+  .hermes h2{font-size:clamp(28px,4vw,42px);font-weight:800;margin:16px 0 10px}
+  .hermes h2 .g{background:linear-gradient(120deg,var(--gold),#ff9d6b);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hermes p{color:var(--muted);font-size:16px}
+  .hermes ul{list-style:none;margin:18px 0 0;display:grid;gap:10px}
+  .hermes li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;color:var(--text)}
+  .hermes li::before{content:"✦";color:var(--gold);font-size:14px;margin-top:2px}
+  .hermes .price{background:var(--bg-2);border:1px solid var(--border);border-radius:18px;padding:26px;text-align:center}
+  .hermes .price .big{font-size:46px;font-weight:800;background:linear-gradient(120deg,var(--gold),#ff9d6b);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hermes .price .per{color:var(--muted);font-size:14px}
+  .hermes .price .setup{margin-top:14px;color:var(--accent-3);font-weight:600;font-size:14px}
+  .hermes .price .btn{margin-top:18px;width:100%;justify-content:center}
+
+  /* ===== Contact ===== */
+  .contact{background:linear-gradient(135deg,#141925,#10131d);border:1px solid var(--border);border-radius:24px;padding:46px;text-align:center;box-shadow:var(--shadow)}
+  .contact h2{font-size:clamp(26px,3.5vw,38px);font-weight:800}
+  .contact p{color:var(--muted);margin-top:10px;font-size:16px}
+  .contact-grid{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:28px}
+  .contact-grid a{
+    display:flex;align-items:center;gap:12px;background:var(--bg-2);border:1px solid var(--border);
+    padding:16px 24px;border-radius:14px;font-weight:600;transition:.2s;min-width:240px
+  }
+  .contact-grid a:hover{transform:translateY(-3px);border-color:var(--accent);background:var(--card)}
+  .contact-grid .ic{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;font-size:20px;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;flex-shrink:0}
+  .contact-grid .meta{text-align:left}
+  .contact-grid .meta small{display:block;color:var(--muted);font-size:12px;font-weight:500}
+  .contact-grid .meta b{font-size:15px}
+
+  footer{padding:40px 0;text-align:center;color:var(--muted);font-size:13.5px;border-top:1px solid var(--border);margin-top:40px}
+
+  @media(max-width:880px){
+    .hero{grid-template-columns:1fr;gap:30px}
+    .hermes{grid-template-columns:1fr;padding:30px}
+    .nav-links{display:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav class="nav">
+      <div class="brand"><span class="logo">SK</span> Сергей Коротких</div>
+      <div class="nav-links">
+        <a href="#hermes">ИИ-агент HERMES</a>
+        <a href="#ai">ИИ и чат-боты</a>
+        <a href="#apps">Веб-сервисы</a>
+        <a href="#server">Серверные модули</a>
+        <a href="#landings">Лендинги</a>
+        <a href="#contact">Контакты</a>
+      </div>
+    </nav>
+
+    <div class="hero">
+      <div>
+        <span class="chip">Разработка • ИИ-автоматизация • Веб</span>
+        <h1>Создаю <span class="grad">веб-сервисы, ИИ-агентов и сайты</span>, которые приносят клиентов</h1>
+        <p class="lead">От продающих лендингов и полноценных веб-приложений до ИИ-агентов в Telegram и интеграций с CRM. Ниже — реальные проекты с живыми демо и исходным кодом.</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="#hermes">🤖 ИИ-агент HERMES</a>
+          <a class="btn btn-ghost" href="#apps">Смотреть проекты</a>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="num">18+</div><div class="label">проектов на GitHub</div></div>
+        <div class="stat"><div class="num">10+</div><div class="label">лендингов с живым демо</div></div>
+        <div class="stat"><div class="num">ИИ</div><div class="label">агенты и чат-боты</div></div>
+        <div class="stat"><div class="num">Full</div><div class="label">stack: front + back + сервер</div></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ===== HERMES ===== -->
+  <section id="hermes">
+    <div class="hermes">
+      <div>
+        <span class="badge">★ ФЛАГМАН • ИИ-АГЕНТ</span>
+        <h2>Агент <span class="g">HERMES</span> — личный ИИ-ассистент в Telegram</h2>
+        <p>Автономный ИИ-агент с постоянной памятью, который живёт прямо в Telegram-боте клиента. Отвечает покупателям 24/7, помнит контекст и историю общения, выполняет задачи и работает как персональный или командный ассистент бизнеса.</p>
+        <ul>
+          <li>Устанавливаю клиенту на его Telegram-бота <b>за 5 минут</b></li>
+          <li>Постоянная память: помнит клиентов, заказы и договорённости между сессиями</li>
+          <li>Работает 24/7 — отвечает на вопросы, консультирует, обрабатывает заявки</li>
+          <li>Управление с телефона, ПК и из групповых чатов команды</li>
+          <li>Запускает задачи по расписанию и пишет сам, когда нужно</li>
+        </ul>
+      </div>
+      <div class="price">
+        <div class="big">500&nbsp;₽</div>
+        <div class="per">в месяц за подключение</div>
+        <div class="setup">⚡ Запуск под ключ за 5 минут</div>
+        <a class="btn btn-primary" href="#contact">Подключить HERMES</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== AI & chatbots ===== -->
+  <section id="ai">
+    <div class="sec-head">
+      <h2><span class="ic">🧠</span> ИИ-решения и чат-боты</h2>
+      <p>Сервисы на базе искусственного интеллекта: умный подбор, локальные LLM и контент-проекты про ИИ в бизнесе.</p>
+    </div>
+    <div class="grid">
+
+      <div class="card">
+        <h3>mentorAI</h3>
+        <div class="desc">ИИ-сервис подбора духовного наставника: пользователь описывает запрос, а алгоритм подбирает подходящего ментора.</div>
+        <div class="tags"><span class="tag">JavaScript</span><span class="tag">AI-подбор</span><span class="tag">Web</span></div>
+        <div class="links">
+          <a class="link-code" href="https://github.com/serg32441/mentorAI" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Search Mentor</h3>
+        <div class="desc">Веб-приложение «Поиск духовного наставника» с подбором и удобным интерфейсом. Развёрнуто на Vercel.</div>
+        <div class="tags"><span class="tag">Web App</span><span class="tag">AI</span><span class="tag">Vercel</span></div>
+        <div class="links">
+          <a class="link-live" href="https://search-mentor-soch.vercel.app" target="_blank" rel="noopener">Открыть демо</a>
+          <a class="link-code" href="https://github.com/serg32441/Search-mentor-soch" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Local LLM Guide</h3>
+        <div class="desc">Практическое руководство по запуску локальных нейросетей: настройка Ollama, Open WebUI и RAG-системы по своим документам.</div>
+        <div class="tags"><span class="tag">TypeScript</span><span class="tag">Ollama</span><span class="tag">RAG</span></div>
+        <div class="links">
+          <a class="link-code" href="https://github.com/serg32441/local-llm-guide" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>ИИ в бизнесе</h3>
+        <div class="desc">Премиальная статья и кейсы о применении искусственного интеллекта в бизнесе — контент-проект с современным дизайном.</div>
+        <div class="tags"><span class="tag">Контент</span><span class="tag">AI</span><span class="tag">GitHub Pages</span></div>
+        <div class="links">
+          <a class="link-live" href="https://serg32441.github.io/ai-business-article/" target="_blank" rel="noopener">Открыть</a>
+          <a class="link-code" href="https://github.com/serg32441/ai-business-article" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== Web apps & services ===== -->
+  <section id="apps">
+    <div class="sec-head">
+      <h2><span class="ic">⚙️</span> Веб-сервисы и приложения</h2>
+      <p>Полноценные приложения с фронтендом и бэкендом: парсеры, трекеры и интерактивные сервисы.</p>
+    </div>
+    <div class="grid">
+
+      <div class="card">
+        <h3>Auto Detailing</h3>
+        <div class="desc">Премиальный сайт-сервис автодетейлинга с 3D-эффектами и современным стеком. Интерактивный интерфейс и серверная логика.</div>
+        <div class="tags"><span class="tag">React</span><span class="tag">Three.js</span><span class="tag">tRPC</span><span class="tag">Drizzle ORM</span></div>
+        <div class="links">
+          <a class="link-live" href="https://auto-detailing-seven.vercel.app" target="_blank" rel="noopener">Открыть демо</a>
+          <a class="link-code" href="https://github.com/serg32441/auto-detailing" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Парсер торгов по банкротству</h3>
+        <div class="desc">Сервис парсинга и отображения лотов с торгов по банкротству (ЕФРСБ): должники, объявления и лоты дебиторской задолженности.</div>
+        <div class="tags"><span class="tag">React 19</span><span class="tag">tRPC + Hono</span><span class="tag">Drizzle</span><span class="tag">PostgreSQL</span></div>
+        <div class="links">
+          <a class="link-live" href="https://bankruptcy-lots-parser.vercel.app" target="_blank" rel="noopener">Открыть демо</a>
+          <a class="link-code" href="https://github.com/serg32441/bankruptcy-lots-parser" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>My Dream Life</h3>
+        <div class="desc">Приложение для постановки и трекинга целей: управление приоритетами, визуализация прогресса, уведомления и авторизация.</div>
+        <div class="tags"><span class="tag">React</span><span class="tag">Supabase</span><span class="tag">Auth</span></div>
+        <div class="links">
+          <a class="link-code" href="https://github.com/serg32441/my-dream-life" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== Server modules ===== -->
+  <section id="server">
+    <div class="sec-head">
+      <h2><span class="ic">🖥️</span> Серверные модули и интеграции</h2>
+      <p>Бэкенд-модули и интеграции с внешними системами — работают на сервере и расширяют возможности бизнеса.</p>
+    </div>
+    <div class="grid">
+
+      <div class="card">
+        <h3>Модуль сверки БТИ для amoCRM</h3>
+        <div class="desc">Серверный модуль для amoCRM: автоматическая сверка схем из БТИ. Интеграция, ускоряющая работу отдела и снижающая число ошибок.</div>
+        <div class="tags"><span class="tag">amoCRM</span><span class="tag">Интеграция</span><span class="tag">Backend</span></div>
+        <div class="links">
+          <a class="link-code" href="https://github.com/serg32441/cnerka-bti" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== Landings ===== -->
+  <section id="landings">
+    <div class="sec-head">
+      <h2><span class="ic">🚀</span> Лендинги и продающие сайты</h2>
+      <p>Быстрые, адаптивные и продающие одностраничники для услуг и бизнеса — с живыми демо.</p>
+    </div>
+    <div class="grid">
+
+      <div class="card">
+        <h3>Стеновые панели в Сочи</h3>
+        <div class="desc">Лендинг премиальных стеновых панелей: каталог, преимущества и форма заявки.</div>
+        <div class="tags"><span class="tag">HTML/CSS</span><span class="tag">Премиум</span></div>
+        <div class="links">
+          <a class="link-live" href="https://serg32441.github.io/wall-panels-sochi/" target="_blank" rel="noopener">Открыть</a>
+          <a class="link-code" href="https://github.com/serg32441/wall-panels-sochi" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>АвтоДетейлинг Сочи</h3>
+        <div class="desc">Сайт химчистки автомобилей: услуги, цены и онлайн-запись. Современный адаптивный дизайн.</div>
+        <div class="tags"><span class="tag">TypeScript</span><span class="tag">Лендинг</span></div>
+        <div class="links">
+          <a class="link-live" href="https://autodetail-sochi.vercel.app" target="_blank" rel="noopener">Открыть</a>
+          <a class="link-code" href="https://github.com/serg32441/autodetail-sochi" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Sochi Detailing</h3>
+        <div class="desc">Лендинг услуг детейлинга в Сочи с акцентом на визуал и конверсию.</div>
+        <div class="tags"><span class="tag">HTML/CSS</span><span class="tag">Лендинг</span></div>
+        <div class="links">
+          <a class="link-live" href="https://sochi-detailing.vercel.app" target="_blank" rel="noopener">Открыть</a>
+          <a class="link-code" href="https://github.com/serg32441/sochi-detailing" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Химчистка и полировка авто</h3>
+        <div class="desc">Сайт частного мастера Сергея: химчистка и полировка авто — услуги, кейсы и контакты.</div>
+        <div class="tags"><span class="tag">HTML/CSS</span><span class="tag">Лендинг</span></div>
+        <div class="links">
+          <a class="link-code" href="https://github.com/serg32441/chemclean-sochi" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Мойка фасадов</h3>
+        <div class="desc">Premium-лендинг услуги мойки фасадов: чистый дизайн, акцент на результат «до/после».</div>
+        <div class="tags"><span class="tag">HTML/CSS</span><span class="tag">Премиум</span></div>
+        <div class="links">
+          <a class="link-live" href="https://facade-sochi.vercel.app" target="_blank" rel="noopener">Открыть</a>
+          <a class="link-code" href="https://github.com/serg32441/facade-sochi" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Arbolito</h3>
+        <div class="desc">Лендинг бренда Arbolito с современной версткой и анимацией.</div>
+        <div class="tags"><span class="tag">HTML/CSS</span><span class="tag">Лендинг</span></div>
+        <div class="links">
+          <a class="link-live" href="https://arbolito-landing.vercel.app" target="_blank" rel="noopener">Открыть</a>
+          <a class="link-code" href="https://github.com/serg32441/arbolito-landing" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Яндекс.Кит — услуги</h3>
+        <div class="desc">Лендинг по настройке интернет-магазинов на Яндекс.Кит и переносу с маркетплейсов.</div>
+        <div class="tags"><span class="tag">HTML/CSS</span><span class="tag">E-commerce</span></div>
+        <div class="links">
+          <a class="link-live" href="https://serg32441.github.io/yandex-kit-services/" target="_blank" rel="noopener">Открыть</a>
+          <a class="link-code" href="https://github.com/serg32441/yandex-kit-services" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>KitPro</h3>
+        <div class="desc">Лендинг услуг разработки магазинов на Яндекс.Кит: пакеты, кейсы и заявка.</div>
+        <div class="tags"><span class="tag">TypeScript</span><span class="tag">E-commerce</span></div>
+        <div class="links">
+          <a class="link-live" href="https://kitpro-yandex-kit-store.vercel.app" target="_blank" rel="noopener">Открыть</a>
+          <a class="link-code" href="https://github.com/serg32441/kitpro-yandex-kit-store" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Montre — фотограф в Сочи</h3>
+        <div class="desc">Сайт-портфолио фотографа: портрет, свадьба и съёмка недвижимости. Галерея и форма заявки.</div>
+        <div class="tags"><span class="tag">HTML/CSS</span><span class="tag">Портфолио</span></div>
+        <div class="links">
+          <a class="link-live" href="https://serg32441.github.io/montre/" target="_blank" rel="noopener">Открыть</a>
+          <a class="link-code" href="https://github.com/serg32441/montre" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Finance Thinks</h3>
+        <div class="desc">Финансовый лендинг с акцентом на доверие и понятную подачу услуг.</div>
+        <div class="tags"><span class="tag">HTML/CSS</span><span class="tag">Финансы</span></div>
+        <div class="links">
+          <a class="link-live" href="https://page-finance-thinks.vercel.app" target="_blank" rel="noopener">Открыть</a>
+          <a class="link-code" href="https://github.com/serg32441/page-finance-thinks" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== Contact ===== -->
+  <section id="contact">
+    <div class="contact">
+      <h2>Обсудим ваш проект?</h2>
+      <p>Сделаю сайт, веб-сервис или подключу ИИ-агента под вашу задачу. Напишите удобным способом — отвечу быстро.</p>
+      <div class="contact-grid">
+        <a href="tel:+79153138254">
+          <span class="ic">📞</span>
+          <span class="meta"><small>Телефон</small><b>8 915 313-82-54</b></span>
+        </a>
+        <a href="https://t.me/serg32441" target="_blank" rel="noopener">
+          <span class="ic">✈️</span>
+          <span class="meta"><small>Telegram</small><b>@serg32441</b></span>
+        </a>
+        <a href="mailto:ya.korotkix@yandex.ru">
+          <span class="ic">✉️</span>
+          <span class="meta"><small>Почта</small><b>ya.korotkix@yandex.ru</b></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    © <span id="year"></span> Сергей Коротких · Веб-разработка, ИИ-агенты и автоматизация ·
+    <a href="https://github.com/serg32441" target="_blank" rel="noopener" style="color:var(--accent)">GitHub</a>
+  </div>
+</footer>
+
+<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>
