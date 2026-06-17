@@ -123,6 +123,28 @@
   .hermes .price .setup{margin-top:14px;color:var(--accent-3);font-weight:600;font-size:14px}
   .hermes .price .btn{margin-top:18px;width:100%;justify-content:center}
 
+  /* ===== SASHA CRM feature ===== */
+  .sasha{
+    background:
+      radial-gradient(700px 300px at 10% -20%,rgba(139,92,246,.18),transparent 60%),
+      linear-gradient(135deg,#14112b,#0f0d1d);
+    border:1px solid #2a2450;border-radius:24px;padding:42px;box-shadow:var(--shadow);
+    display:grid;grid-template-columns:1.2fr 1fr;gap:36px;align-items:center;position:relative;overflow:hidden
+  }
+  .sasha .badge{display:inline-flex;align-items:center;gap:8px;background:rgba(139,92,246,.15);color:#c4b5fd;border:1px solid rgba(139,92,246,.4);padding:6px 14px;border-radius:999px;font-size:13px;font-weight:700;letter-spacing:.5px}
+  .sasha h2{font-size:clamp(28px,4vw,42px);font-weight:800;margin:16px 0 10px}
+  .sasha h2 .g{background:linear-gradient(120deg,#a78bfa,#7c3aed);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sasha p{color:var(--muted);font-size:16px}
+  .sasha ul{list-style:none;margin:18px 0 0;display:grid;gap:10px}
+  .sasha li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;color:var(--text)}
+  .sasha li::before{content:"✦";color:#a78bfa;font-size:14px;margin-top:2px}
+  .sasha .demo{background:var(--bg-2);border:1px solid #2a2450;border-radius:18px;padding:26px;text-align:center}
+  .sasha .demo .big{font-size:38px;font-weight:800;background:linear-gradient(120deg,#a78bfa,#7c3aed);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.2}
+  .sasha .demo .per{color:var(--muted);font-size:14px;margin-top:6px}
+  .sasha .demo .setup{margin-top:14px;color:var(--accent-3);font-weight:600;font-size:14px}
+  .sasha .demo .btn{margin-top:18px;width:100%;justify-content:center;background:linear-gradient(135deg,#7c3aed,#a78bfa);border:none;color:#fff;box-shadow:0 10px 30px rgba(124,58,237,.35)}
+  .sasha .demo .btn:hover{filter:brightness(1.1);transform:translateY(-2px)}
+
   /* ===== Contact ===== */
   .contact{background:linear-gradient(135deg,#141925,#10131d);border:1px solid var(--border);border-radius:24px;padding:46px;text-align:center;box-shadow:var(--shadow)}
   .contact h2{font-size:clamp(26px,3.5vw,38px);font-weight:800}
@@ -143,6 +165,7 @@
   @media(max-width:880px){
     .hero{grid-template-columns:1fr;gap:30px}
     .hermes{grid-template-columns:1fr;padding:30px}
+    .sasha{grid-template-columns:1fr;padding:30px}
     .nav-links{display:none}
   }
 </style>
@@ -155,6 +178,7 @@
       <div class="brand"><span class="logo">SK</span> Сергей Коротких</div>
       <div class="nav-links">
         <a href="#hermes">ИИ-агент HERMES</a>
+        <a href="#sasha">CRM «Саша»</a>
         <a href="#ai">ИИ и чат-боты</a>
         <a href="#apps">Веб-сервисы</a>
         <a href="#server">Серверные модули</a>
@@ -205,6 +229,32 @@
         <div class="per">в месяц за подключение</div>
         <div class="setup">⚡ Запуск под ключ за 5 минут</div>
         <a class="btn btn-primary" href="#contact">Подключить HERMES</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SASHA CRM ===== -->
+  <section id="sasha">
+    <div class="sasha">
+      <div>
+        <span class="badge">★ CRM-СИСТЕМА • ПАРТНЁРСКАЯ СЕТЬ</span>
+        <h2>CRM <span class="g">«Саша»</span> — распределение заявок между партнёрами</h2>
+        <p>Сотни заявок, десятки партнёров — на одном экране. Саша помогает вести учёт заявок на ремонт, видеть статус каждой, держать всю сеть партнёров под контролем и не терять комиссию.</p>
+        <ul>
+          <li>Автоматическое распределение заявок по городам и исполнителям</li>
+          <li>Партнёры получают заявки прямо в <b>Telegram</b> — мгновенно</li>
+          <li>Статус каждой заявки в реальном времени — ничего не теряется</li>
+          <li>Вся партнёрская сеть на одном экране: города, мастера, загрузка</li>
+          <li>Комиссия не теряется: система фиксирует каждую сделку</li>
+          <li>Настройка за 5 минут — без карты, без сложного онбординга</li>
+        </ul>
+      </div>
+      <div class="demo">
+        <div class="big">Живой<br>сервис</div>
+        <div class="per">Работает на реальных заявках</div>
+        <div class="setup">⚡ Настройка за 5 минут · Без карты</div>
+        <a class="btn" href="https://chm-sochi.ru/" target="_blank" rel="noopener">Открыть сервис</a>
+        <a class="btn" href="https://github.com/serg32441/yandex-kit-services/tree/claude/repair-request-tracking-6YfVM" target="_blank" rel="noopener" style="margin-top:10px;background:var(--bg-2);border:1px solid var(--border);color:var(--text)">GitHub</a>
       </div>
     </div>
   </section>
